@@ -490,7 +490,22 @@ def main():
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, admin_messages))
 
     app.job_queue.run_repeating(check_expirations, interval=86400, first=10)
+    import threading
+from flask import Flask
+import os
 
+flask_app = Flask('')
+
+@flask_app.route('/')
+def home():
+    return "Bot activo ✅"
+
+def run_server():
+    port = int(os.environ.get("PORT", 5000))
+    flask_app.run(host="0.0.0.0", port=port)
+
+# Iniciar servidor en segundo plano
+threading.Thread(target=run_server, daemon=True).start()
     print("🔥 BOT FUNCIONANDO")
     app.run_polling()
 
