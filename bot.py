@@ -506,6 +506,7 @@ def run_server():
 
 # Iniciar servidor en segundo plano
 threading.Thread(target=run_server, daemon=True).start()
+
     print("🔥 BOT FUNCIONANDO")
     app.run_polling()
 
